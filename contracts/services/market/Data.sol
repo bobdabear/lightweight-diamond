@@ -1,12 +1,12 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {IDiamond} from '../../../modules/diamond/interfaces/IDiamond.sol';
-import {IDiamondCut} from '../../../modules/diamond/interfaces/IDiamondCut.sol';
-import {ERROR} from 'contracts/types/Error.sol';
+import {IDiamond} from "../../../modules/diamond/interfaces/IDiamond.sol";
+import {IDiamondCut} from "../../../modules/diamond/interfaces/IDiamondCut.sol";
+import {ERROR} from "contracts/types/Error.sol";
 
 library Data {
-    bytes32 constant key = keccak256('market.storage');
+    bytes32 constant key = keccak256("market.storage");
 
     struct Storage {
         mapping(address => bool) permission;
@@ -23,13 +23,25 @@ library Data {
     }
 
     // functions for market diamond contract only
-    function market(Storage storage s, address _addr, address _base, address _quote) internal returns (address) {
+    function market(
+        Storage storage s,
+        address _addr,
+        address _base,
+        address _quote
+    ) internal returns (address) {
         return s.market[_base][_quote] = _addr;
     }
 
-    function push(Storage storage s, address _addr, address _base, address _quote) internal {
-        if (s.market[_base][_quote] != address(0)) revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
-        if (s.market[_quote][_base] != address(0)) revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
+    function push(
+        Storage storage s,
+        address _addr,
+        address _base,
+        address _quote
+    ) internal {
+        if (s.market[_base][_quote] != address(0))
+            revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
+        if (s.market[_quote][_base] != address(0))
+            revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
 
         s.market[_base][_quote] = _addr;
         s.market[_quote][_base] = _addr;

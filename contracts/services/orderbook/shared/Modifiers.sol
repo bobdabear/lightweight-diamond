@@ -1,8 +1,8 @@
-// SPDX-License-Identifier: BUSL-1.1
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {ERROR} from 'contracts/types/Error.sol';
-import {Data} from '../Data.sol';
+import {ERROR} from "contracts/types/Error.sol";
+import {Data} from "../Data.sol";
 
 abstract contract Modifiers {
     using Data for address;
