@@ -24,6 +24,8 @@ Functions are spread out from the one single contract as facets in the diamond p
         └─ `Facet3.sol`
 ```
 
+`modules`: The `modules` folder is similar to `node_modules`. This is a folder that contains template contracts with ready-made functions that we need to refer to and use through importing. The light-weight version of the Diamond contract we use is located here.
+
 ## Concept
 
 This example was created to help implement diamond patterns easily. Also, if you want to provide clear addresses to separate the touchpoints with which users will interact, you can implement a diamond pattern that shares functionality but has different data storage.
