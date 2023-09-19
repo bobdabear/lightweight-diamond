@@ -78,7 +78,7 @@ Therefore, facades can be created infinitely, each with its own storage. However
 ─ Orderbook 1 (Diamond Facade) ─────────────┤
   │  └─ local values for orderbook 1 only   │
   │                                         │
-─ Orderbook 1 (Diamond Facade) ─────────────┘
+─ Orderbook 2 (Diamond Facade) ─────────────┘
   │  └─ local values for orderbook 2 only
   ⋮
 
