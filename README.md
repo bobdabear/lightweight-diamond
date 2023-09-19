@@ -83,6 +83,51 @@ Therefore, facades can be created infinitely, each with its own storage. However
   ⋮
 ```
 
+### Data Storage
+
+If you want to reference data storage in facets, they can be used in the following ways:
+
+```
+import {Data} './Data.sol';
+
+contract MyContract{
+
+  function myFunction() public returns (uint) {
+    Data.Storage storage s = Data.load();
+    return s.myValue;
+  }
+
+  ...
+}
+
+```
+
+Or, for easier use, you can more conveniently access storage from all facets with a single declaration in the Modifiers.sol contract that all facet contracts inherit.
+
+```
+import {Data} './Data.sol';
+
+contract Modifiers {
+  using Data for Data.Storage;
+  Data.Storage internal s;
+}
+
+contract Facet1 is Modifiers{
+  function Function1 () public {
+    s.myValue + 1;
+  }
+}
+
+contract Facet1 is Modifiers{
+  function Function2 () public {
+    s.myValue * 4;
+  }
+}
+
+...
+
+```
+
 ## Requirements
 
 -   [Node.js 20+](https://nodejs.org)
