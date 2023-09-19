@@ -8,19 +8,21 @@ This project was created to make it easier to use the diamond pattern through ab
 
 Functions are spread out from the one single contract as facets in the diamond pattern. Categorizing contracts with just types such as 'interfaces' or 'libraries' would make a project more complex. So in this case suggest to use like a grouping like a family according to their function's same point of features. This folding rule follow:
 
--   contracts
-    └─ services
-    ├─ `Service.sol` : Diamond contract
-    ├─ `IService.sol` : Interface that combine with all of facet's functions for diamond contract
-    ├─ `Data.sol` : Data storage for diamond contract
-    ┣─ shared : Shared functions between facets
-    │ ├─ `Modifers.sol` : Modifier functions for facets
-    │ ├─ `Events.sol` : Events for facets
-    │ └─ `Internals.sol` : Shared functions as internal for facets
-    └─ facets : Facets
-    ├─ `Facet1.sol`
-    ├─ `Facet2.sol`
-    └─ `Facet3.sol`
+```
+─ contracts
+  └─ services
+     ├─ `Service.sol` : Diamond contract
+     ├─ `IService.sol` : Interface that combine with all of facet's functions for diamond contract
+     ├─ `Data.sol` : Data storage for diamond contract
+     ┣─ shared : Shared functions between facets
+     │ ├─ `Modifers.sol` : Modifier functions for facets
+     │ ├─ `Events.sol` : Events for facets
+     │ └─ `Internals.sol` : Shared functions as internal for facets
+     └─ facets : Facets
+     ├─ `Facet1.sol`
+     ├─ `Facet2.sol`
+     └─ `Facet3.sol`
+```
 
 ## Concept
 
@@ -65,7 +67,7 @@ For this purpose, this is an example of factoryizing a diamond contract called a
 Therefore, facades can be created infinitely, each with its own storage. However, since all of the facades' functions are managed by the parent diamond, multiple diamond functions can be updated and managed at once.
 
 ```
-Market.sol (Diamond)
+─ Market.sol (Diamond)
   ├─ Data.sol (Local Data Storage for Market)
   │  └─ local values for market contract only
   │
