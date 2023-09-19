@@ -56,10 +56,10 @@ contract Service is DiamondContract{
 
 This repository is an example to address the following needs:
 
--   In order for users to clearly distinguish and interact with a specific order book among order books for various token pairs, a different address is required for each order book as an access point.
--   Each order book must have its own data storage and store real-time prices and orders in different storage, but share functionality.
+-   In order for users to clearly distinguish and interact with a specific orderbook among orderbooks for various token pairs, a different address is required for each orderbook as an access point.
+-   Each orderbook must have its own data storage and store real-time prices and orders in different storage, but share functionality.
 
-For this purpose, this is an example of factoryizing a diamond contract called an order book.
+For this purpose, this is an example of factoryizing a diamond contract called an orderbook.
 
 `Market.sol (Diamond)` : A market contract serves several functions for the market and includes common orderbook facets.
 `Orderbook.sol (Facade)` : It is a contract that does not itself have a facet for implementing any functionality. The facade only has the address of the parent diamond contract, and the parent holds the facade's facet instead.
