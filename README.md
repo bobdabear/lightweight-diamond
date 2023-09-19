@@ -30,7 +30,7 @@ Functions are spread out from the one single contract as facets in the diamond p
 
 This example was created to help implement diamond patterns easily. Also, if you want to provide clear addresses to separate the touchpoints with which users will interact, you can implement a diamond pattern that shares functionality but has different data storage.
 
-In this example repository, facet management and state value management storage are used separately. Storage for diamond or facet management is created through `DiamondContractManger`, which is only used for adding and managing facets. The unique state value of a specific diamond is managed by Data.sol.
+In this example repository, facet management and state value management storage are used separately. Storage for diamond or facet management is created through `DiamondContractManger`, which is only used for adding and managing facets. The unique state value of a specific diamond is managed by [Data.sol](contracts/services/market/Data.sol).
 
 -   `DiamondContract` : It is an abstracted contract with a constructor and fallback and receive functions to use the Diamond pattern. It has a separate `DiamondContractManger`.
 -   `DiamondContractManager`: It has storage just for facet management along with the function to manage facets and owners included in the contract.
