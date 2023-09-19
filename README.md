@@ -30,9 +30,9 @@ Functions are spread out from the one single contract as facets in the diamond p
 
 This example was created to help implement diamond patterns easily. Also, if you want to provide clear addresses to separate the touchpoints with which users will interact, you can implement a diamond pattern that shares functionality but has different data storage.
 
-In this example repository, facet management and state value management storage are used separately. Storage for diamond or facet management is created through DiamondContractManger, which is only used for adding and managing facets. The unique state value of a specific diamond is managed by Data.sol.
+In this example repository, facet management and state value management storage are used separately. Storage for diamond or facet management is created through `DiamondContractManger`, which is only used for adding and managing facets. The unique state value of a specific diamond is managed by Data.sol.
 
--   `DiamondContract` : It is an abstracted contract with a constructor and fallback and receive functions to use the Diamond pattern. It has a separate DiamondContractManger.
+-   `DiamondContract` : It is an abstracted contract with a constructor and fallback and receive functions to use the Diamond pattern. It has a separate `DiamondContractManger`.
 -   `DiamondContractManager`: It has storage just for facet management along with the function to manage facets and owners included in the contract.
 -   `DiamondFacade` : This is an abstraction contract provided for the creation of a diamond contract. It does not hold any storage or facets itself and acts as a relay that only holds 'fallback'.
 
@@ -86,7 +86,78 @@ Therefore, facades can be created infinitely, each with its own storage. However
 
 ```
 
+### Internal
+
+The functions defined in Internals.sol are internal and cannot be accessed from outside the blockchain, but also define functions shared by functions of different Facets. You can find an example in [contracts/services/orderbook/shared/Internals.sol](contracts/services/orderbook/shared/Internals.sol).
+
+```
+import 'Data.sol';
+
+library Internals {
+    using Data for Data.Storage;
+    using Internals for Data.Storage;
+
+    function internalFunction1 (Data.Storage storage s, uint _value) internal {
+      s.value = _value
+    }
+
+    function internalFunction2 (Data.Storage storage s, uint _value) internal view returns(uint) {
+      return s.value;
+    }
+}
+```
+
+Use case of between facets can be checked in [contracts/services/orderbook/facets/Order.sol](contracts/services/orderbook/facets/Order.sol) and [contracts/services/orderbook/facets/Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
+
+```
+import {Internals} from '../shared/Internals.sol'
+
+contract FacetA {
+    using Internals for Data.Storage;
+
+    function functionFacetA (uint _value) {
+      s.internalFunction1(_value);
+    }
+}
+
+contract FacetB{
+    using Internals for Data.Storage;
+
+    function functionFacetB (uint _value) {
+      s.internalFunction1(_value);
+    }
+}
+
+```
+
+For public functions, you can use them by declaring them in an interface and referencing them.
+
+```
+MarketFacetA{
+  IMarket(address(this)).facetBfunction();
+}
+```
+
 ### Data Storage
+
+Storage that manages facets is automatically created through `DiamondContractManger` by inheriting `DiamondContract`. Separately from this, variables for state management targeting only specific services related to the business logic of the contract must form a separate `Data.sol` contract.
+
+```
+library Data {
+  Storage {
+    bool myValue1;
+    uint myValue2;
+    address myValue3;
+  }
+
+  function load() internal pure returns (Storage storage s) {
+      bytes32 __ = key;
+      assembly {
+          s.slot := __
+      }
+  }
+}
+```
 
 If you want to reference data storage in facets, they can be used in the following ways:
 
