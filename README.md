@@ -73,7 +73,7 @@ Therefore, facades can be created infinitely, each with its own storage. However
   │
   └─ DiamondContractManager (Data Storage for Facets)
      ├─ Market facets
-     └─ Orderbook facets  ◀────────────────┐
+     └─ Orderbook facets  ◀─────────────────┐
                                             │
 ─ Orderbook 1 (Diamond Facade) ─────────────┤
   │  └─ local values for orderbook 1 only   │
