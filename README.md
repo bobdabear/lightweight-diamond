@@ -1,10 +1,10 @@
-### Light-weight Diamond Pattern
+# Light-weight Diamond Pattern
 
-### Overview
+# Overview
 
 This project was created to make it easier to use the diamond pattern through abstract implementation and inheritance.
 
-# Foldering
+### Foldering
 
 Functions are spread out from the one single contract as facets in the diamond pattern. Categorizing contracts with just types such as 'interfaces' or 'libraries' would make a project more complex. So in this case suggest to use like a grouping like a family according to their function's same point of features. This folding rule follow:
 
@@ -34,7 +34,7 @@ In this example repository, facet management and state value management storage 
 -   `DiamondContractManager`: It has storage just for facet management along with the function to manage facets and owners included in the contract.
 -   `DiamondFacade` : This is an abstraction contract provided for the creation of a diamond contract. It does not hold any storage or facets itself and acts as a relay that only holds 'fallback'.
 
-# Inheriting and Implementation
+### Inheriting and Implementation
 
 This implementation simplifies building the diamond pattern through contract inheritance, as shown below:
 
@@ -42,7 +42,7 @@ This implementation simplifies building the diamond pattern through contract inh
 contract Service is DiamondContract
 ```
 
-# PrivateKey for Storage
+### PrivateKey for Storage
 
 In the constructor, just simply set the service contract's key (slot position) for data storage.
 
@@ -52,7 +52,7 @@ contract Service is DiamondContract{
 }
 ```
 
-# Diamond Factory
+### Diamond Factory
 
 This repository is an example to address the following needs:
 
