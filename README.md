@@ -227,7 +227,6 @@ contract Facet1 is Modifiers{
     $.myValue * 4;
   }
 }
-
 ...
 
 ```
