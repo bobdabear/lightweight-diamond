@@ -93,7 +93,7 @@ Therefore, facades can be created infinitely, each with its own storage. However
 
 ### Internal
 
-The functions defined in Internals.sol are internal and cannot be accessed from outside the blockchain, but also define functions shared by functions of different Facets. You can find an example in [Internals.sol](contracts/services/orderbook/shared/Internals.sol).
+The functions defined in `Internals.sol` are internal and cannot be accessed from outside the blockchain, but also define functions shared by functions of different Facets. You can find an example in [Internals.sol](contracts/services/orderbook/shared/Internals.sol).
 
 ```
 import 'Data.sol';
