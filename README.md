@@ -112,7 +112,7 @@ library Internals {
 }
 ```
 
-Use case of between facets can be checked in [Order.sol](contracts/services/orderbook/facets/Order.sol) and [Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
+A use case for internal functions that need to be shared between facets can be found in [Internals.sol](contracts/services/orderbook/shared/Internals.sol), [Order.sol](contracts/services/orderbook/facets/Order.sol) and [Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
 
 ```
 import {Data} from "../Data.sol";
