@@ -61,10 +61,10 @@ abstract contract DiamondContract {
     }
 
     fallback() external payable virtual {
-        DiamondContractManager.Data storage c;
+        DiamondContractManager.Data storage $;
         bytes32 slot = _this;
         assembly {
-            c.slot := slot
+            $.slot := slot
         }
         address f = c.facet[msg.sig].addr;
         if (f == address(0)) {
