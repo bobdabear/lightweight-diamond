@@ -9,7 +9,7 @@ import {Data} from "./Data.sol";
 contract Market is DiamondContract {
     using Data for Data.Storage;
 
-    Data.Storage internal s;
+    Data.Storage internal $;
 
     /*
      * At the time of creation, the parent diamond must also receive the facets of the child (facade) through 'diamondCut' here.
@@ -19,6 +19,6 @@ contract Market is DiamondContract {
         IDiamondCut.FacetCut[] memory _diamondCut,
         IDiamondCut.DiamondArgs memory _args
     ) DiamondContract(keccak256("market.storage"), _diamondCut, _args) {
-        s.permission[msg.sender] = true;
+        $.permission[msg.sender] = true;
     }
 }

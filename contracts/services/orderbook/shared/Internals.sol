@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {Data} from '../Data.sol';
+import {Data} from "../Data.sol";
 
-library Internals{
+library Internals {
     using Data for Data.Storage;
     using Internals for Data.Storage;
 
-    function matching(Data.Storage storage s, uint _price) internal {
-        s.price = _price * 2;
+    function matching(Data.Storage storage $, uint _price) internal {
+        $.price = _price * 2;
     }
 
-    function fill(Data.Storage storage s) internal {
-        ++s.tick;
+    function fill(Data.Storage storage $) internal {
+        ++$.tick;
     }
-    
-    function execute(Data.Storage storage s, uint _price) internal {
-        s.matching(_price);
-        s.fill();
+
+    function execute(Data.Storage storage $, uint _price) internal {
+        $.matching(_price);
+        $.fill();
     }
 }

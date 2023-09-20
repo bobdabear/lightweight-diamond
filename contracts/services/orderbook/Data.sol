@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {IDiamond} from 'modules/diamond/interfaces/IDiamond.sol';
-import {IDiamondCut} from 'modules/diamond/interfaces/IDiamondCut.sol';
-import {Type} from 'contracts/types/Type.sol';
+import {IDiamond} from "modules/diamond/interfaces/IDiamond.sol";
+import {IDiamondCut} from "modules/diamond/interfaces/IDiamondCut.sol";
+import {Type} from "contracts/types/Type.sol";
 
 library Data {
-    bytes32 constant key = keccak256('orderbook.storage');
+    bytes32 constant key = keccak256("orderbook.storage");
 
     struct Storage {
         address base;
@@ -15,10 +15,10 @@ library Data {
         uint price;
     }
 
-    function load() internal pure returns (Storage storage s) {
+    function load() internal pure returns (Storage storage $) {
         bytes32 __ = key;
         assembly {
-            s.slot := __
+            $.slot := __
         }
     }
 }

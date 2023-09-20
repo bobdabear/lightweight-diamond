@@ -20,7 +20,7 @@ contract Create is Modifiers {
         address newMarket = address(
             new Orderbook(_base, _quote, _initialPrice, address(this))
         );
-        s.push(newMarket, _base, _quote);
+        $.push(newMarket, _base, _quote);
         emit Events.MarketOpen(newMarket, _base, _quote);
         return newMarket;
     }

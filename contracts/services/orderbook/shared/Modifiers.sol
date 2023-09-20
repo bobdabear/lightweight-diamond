@@ -8,5 +8,5 @@ abstract contract Modifiers {
     using Data for address;
     using Data for Data.Storage;
 
-    Data.Storage internal s;
+    Data.Storage internal $;
 }

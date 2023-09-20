@@ -96,12 +96,12 @@ library Internals {
     using Data for Data.Storage;
     using Internals for Data.Storage;
 
-    function internalFunction1 (Data.Storage storage s, uint _value) internal {
-      s.value = _value
+    function internalFunction1 (Data.Storage storage $, uint _value) internal {
+      $.value = _value
     }
 
-    function internalFunction2 (Data.Storage storage s, uint _value) internal view returns(uint) {
-      return s.value;
+    function internalFunction2 (Data.Storage storage $, uint _value) internal view returns(uint) {
+      return $.value;
     }
 }
 ```
@@ -115,7 +115,7 @@ contract FacetA {
     using Internals for Data.Storage;
 
     function functionFacetA (uint _value) {
-      s.internalFunction1(_value);
+      $.internalFunction1(_value);
     }
 }
 
@@ -123,7 +123,7 @@ contract FacetB{
     using Internals for Data.Storage;
 
     function functionFacetB (uint _value) {
-      s.internalFunction1(_value);
+      $.internalFunction1(_value);
     }
 }
 
@@ -149,10 +149,10 @@ library Data {
     address myValue3;
   }
 
-  function load() internal pure returns (Storage storage s) {
+  function load() internal pure returns (Storage storage $) {
       bytes32 __ = key;
       assembly {
-          s.slot := __
+          $.slot := __
       }
   }
 }
@@ -166,8 +166,8 @@ import {Data} './Data.sol';
 contract MyContract{
 
   function myFunction() public returns (uint) {
-    Data.Storage storage s = Data.load();
-    return s.myValue;
+    Data.Storage storage $ = Data.load();
+    return $.myValue;
   }
 
   ...
@@ -182,18 +182,18 @@ import {Data} './Data.sol';
 
 contract Modifiers {
   using Data for Data.Storage;
-  Data.Storage internal s;
+  Data.Storage internal $;
 }
 
 contract Facet1 is Modifiers{
   function Function1 () public {
-    s.myValue + 1;
+    $.myValue + 1;
   }
 }
 
 contract Facet1 is Modifiers{
   function Function2 () public {
-    s.myValue * 4;
+    $.myValue * 4;
   }
 }
 

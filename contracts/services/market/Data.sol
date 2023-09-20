@@ -15,39 +15,39 @@ library Data {
         address[] all_markets;
     }
 
-    function load() internal pure returns (Storage storage s) {
+    function load() internal pure returns (Storage storage $) {
         bytes32 __ = key;
         assembly {
-            s.slot := __
+            $.slot := __
         }
     }
 
     // functions for market diamond contract only
     function market(
-        Storage storage s,
+        Storage storage $,
         address _addr,
         address _base,
         address _quote
     ) internal returns (address) {
-        return s.market[_base][_quote] = _addr;
+        return $.market[_base][_quote] = _addr;
     }
 
     function push(
-        Storage storage s,
+        Storage storage $,
         address _addr,
         address _base,
         address _quote
     ) internal {
-        if (s.market[_base][_quote] != address(0))
+        if ($.market[_base][_quote] != address(0))
             revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
-        if (s.market[_quote][_base] != address(0))
+        if ($.market[_quote][_base] != address(0))
             revert ERROR.CODE(ERROR.TYPE.EXIST_MARKET);
 
-        s.market[_base][_quote] = _addr;
-        s.market[_quote][_base] = _addr;
+        $.market[_base][_quote] = _addr;
+        $.market[_quote][_base] = _addr;
 
-        s.markets[_base].push(_addr);
-        s.markets[_quote].push(_addr);
-        s.all_markets.push(_addr);
+        $.markets[_base].push(_addr);
+        $.markets[_quote].push(_addr);
+        $.all_markets.push(_addr);
     }
 }

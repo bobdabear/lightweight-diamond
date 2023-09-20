@@ -10,7 +10,7 @@ import "hardhat/console.sol";
 contract Orderbook is DiamondFacade {
     using Data for Data.Storage;
 
-    Data.Storage internal s;
+    Data.Storage internal $;
 
     /*
      * The address of '_app' is the address of the parent diamond. '_app' has all the facet contracts of the corresponding facade,
@@ -27,9 +27,9 @@ contract Orderbook is DiamondFacade {
         // It can also be used in other ways such as shown below in other facet contracts.
         // Data.Storage storage Data.load();
 
-        s.base = _base;
-        s.quote = _quote;
-        s.price = _price;
+        $.base = _base;
+        $.quote = _quote;
+        $.price = _price;
 
         // super.setPermission(_owner, true);
         // super.setInterface(type(IOrderbook).interfaceId, true);

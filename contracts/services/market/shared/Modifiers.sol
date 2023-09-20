@@ -8,10 +8,10 @@ abstract contract Modifiers {
     using Data for address;
     using Data for Data.Storage;
 
-    Data.Storage internal s;
+    Data.Storage internal $;
 
     modifier auth() {
-        if (!s.permission[msg.sender])
+        if (!$.permission[msg.sender])
             revert ERROR.CODE(ERROR.TYPE.NO_PERMISSION);
         _;
     }
