@@ -26,9 +26,9 @@ library DiamondContractManager {
         mapping(bytes32 => mapping(address => bool)) permission;
     }
 
-    function contract_(bytes32 _contract) internal pure returns (Data storage c) {
+    function contract_(bytes32 _contract) internal pure returns (Data storage $) {
         assembly {
-            c.slot := _contract
+            $.slot := _contract
         }
     }
 
@@ -37,15 +37,15 @@ library DiamondContractManager {
     }
 
     function setInterface(bytes32 _contract, bytes4 _funct, bool _state) internal {
-        Data storage c = contract_(_contract);
-        c.checkPermission(_contract, msg.sender);
-        c.interfaces[_contract][_funct] = _state;
+        Data storage $ = contract_(_contract);
+        $.checkPermission(_contract, msg.sender);
+        $.interfaces[_contract][_funct] = _state;
     }
     
     function setOwner(bytes32 _contract, address _owner) internal {
-        Data storage c = contract_(_contract);
-        emit OwnershipTransferred(c.owner, _owner);
-        c.owner = _owner;
+        Data storage $ = contract_(_contract);
+        emit OwnershipTransferred($.owner, _owner);
+        $.owner = _owner;
     }
 
     function owner(bytes32 _contract) internal view returns (address _owner) {
@@ -59,13 +59,13 @@ library DiamondContractManager {
     }
 
     function setPermission(bytes32 _contract, address _owner, bool _permission) internal {
-        Data storage c = contract_(_contract);
-        c.checkPermission(_contract, msg.sender);
-        c.permission[_contract][_owner] = _permission;
+        Data storage $ = contract_(_contract);
+        $.checkPermission(_contract, msg.sender);
+        $.permission[_contract][_owner] = _permission;
     }
 
-    function checkPermission(Data storage c, bytes32 _contract, address _owner) internal view returns (bool check) {
-        check = _owner != c.owner && !c.permission[_contract][_owner];
+    function checkPermission(Data storage $, bytes32 _contract, address _owner) internal view returns (bool check) {
+        check = _owner != $.owner && !$.permission[_contract][_owner];
         if (check) revert IDiamond.PermissionDenied(_owner);
         return check;
     }
@@ -100,30 +100,30 @@ library DiamondContractManager {
         if (_facet == address(0)) {
             revert IDiamond.CannotAddSelectorsToZeroAddress(_functs);
         }
-        Data storage c = contract_(_contract);
-        uint16 position = uint16(c.functs.length);
+        Data storage $ = contract_(_contract);
+        uint16 position = uint16($.functs.length);
         enforceHasContractCode(_facet, 'LibDiamondCut: Add facet has no code');
         for (uint i; i < _functs.length; ++i) {
             bytes4 funct = _functs[i];
-            address facet_ = c.facet[funct].addr;
+            address facet_ = $.facet[funct].addr;
             if (facet_ != address(0)) {
                 revert IDiamond.CannotAddFunctionToDiamondThatAlreadyExists(funct);
             }
-            c.facet[funct] = Facet(_facet, position);
-            c.functs.push(funct);
+            $.facet[funct] = Facet(_facet, position);
+            $.functs.push(funct);
             ++position;
         }
     }
 
     function replaceFunctions(bytes32 _contract, address _facet, bytes4[] memory _functs) internal {
-        Data storage c = contract_(_contract);
+        Data storage $ = contract_(_contract);
         if (_facet == address(0)) {
             revert IDiamond.CannotReplaceFunctionsFromFacetWithZeroAddress(_functs);
         }
         enforceHasContractCode(_facet, 'LibDiamondCut: Replace facet has no code');
         for (uint i; i < _functs.length; ++i) {
             bytes4 funct = _functs[i];
-            address facet_ = c.facet[funct].addr;
+            address facet_ = $.facet[funct].addr;
             // can't replace immutable functions -- functions defined directly in the diamond in this case
             if (facet_ == address(this)) {
                 revert IDiamond.CannotReplaceImmutableFunction(funct);
@@ -135,19 +135,19 @@ library DiamondContractManager {
                 revert IDiamond.CannotReplaceFunctionThatDoesNotExists(funct);
             }
             // replace old facet address
-            c.facet[funct].addr = _facet;
+            $.facet[funct].addr = _facet;
         }
     }
 
     function removeFunctions(bytes32 _contract, address _facet, bytes4[] memory _functs) internal {
-        Data storage c = contract_(_contract);
-        uint position = c.functs.length;
+        Data storage $ = contract_(_contract);
+        uint position = $.functs.length;
         if (_facet != address(0)) {
             revert IDiamond.RemoveFacetAddressMustBeZeroAddress(_facet);
         }
         for (uint i; i < _functs.length; ++i) {
             bytes4 funct = _functs[i];
-            Facet memory old = c.facet[funct];
+            Facet memory old = $.facet[funct];
             if (old.addr == address(0)) {
                 revert IDiamond.CannotRemoveFunctionThatDoesNotExist(funct);
             }
@@ -159,13 +159,13 @@ library DiamondContractManager {
             // replace funct with last funct
             --position;
             if (old.position != position) {
-                bytes4 last = c.functs[position];
-                c.functs[old.position] = last;
-                c.facet[last].position = old.position;
+                bytes4 last = $.functs[position];
+                $.functs[old.position] = last;
+                $.facet[last].position = old.position;
             }
             // delete last funct
-            c.functs.pop();
-            delete c.facet[funct];
+            $.functs.pop();
+            delete $.facet[funct];
         }
     }
 
@@ -173,7 +173,7 @@ library DiamondContractManager {
         if (_init == address(0)) {
             return;
         }
-        enforceHasContractCode(_init, 'LibDiamondCut: _init address has no code');
+        enforceHasContractCode(_init, 'DiamondCut: _init address has no code');
         (bool success, bytes memory error) = _init.delegatecall(_calldata);
         if (!success) {
             if (error.length > 0) {
