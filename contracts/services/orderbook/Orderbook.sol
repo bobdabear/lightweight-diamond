@@ -5,8 +5,6 @@ import {DiamondFacade} from "modules/diamond/DiamondFacade.sol";
 import {IOrderbook} from "./IOrderbook.sol";
 import {Data} from "./Data.sol";
 
-import "hardhat/console.sol";
-
 contract Orderbook is DiamondFacade {
     using Data for Data.Storage;
 

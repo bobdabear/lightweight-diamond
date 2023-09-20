@@ -7,35 +7,20 @@ pragma solidity ^0.8.19;
 * Lightweight version of EIP-2535 Diamonds 
 /******************************************************************************/
 
-import {IDiamond} from './interfaces/IDiamond.sol';
-import {IDiamondCut} from './interfaces/IDiamondCut.sol';
-import {DiamondContract} from './DiamondContract.sol';
+import {IDiamond} from "./interfaces/IDiamond.sol";
+import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
 
-import 'hardhat/console.sol';
+import {DiamondFacadeAuth} from "./utils/facade/DiamondFacadeAuth.sol";
+import {DiamondFacadeLoupe} from "./utils/facade/DiamondFacadeLoupe.sol";
+import {DiamondContract} from "./DiamondContract.sol";
 
-abstract contract DiamondFacade {
+abstract contract DiamondFacade is DiamondFacadeAuth, DiamondFacadeLoupe {
     bytes32 private immutable _this;
-    address payable private immutable app;
+    address payable private app;
 
     constructor(bytes32 _key, address _app) payable {
         _this = _key;
         app = payable(_app);
-    }
-
-    function facet(bytes4 _funct) public view virtual returns (address) {
-        return DiamondContract(app).facet(_this, _funct);
-    }
-
-    function setInterface(bytes4 _funct, bool _state) public virtual {
-        DiamondContract(app).setInterface(_this, _funct, _state);
-    }
-
-    function setPermission(address _owner, bool _permission) public virtual{
-        DiamondContract(app).setPermission(_this, _owner, _permission);
-    }
-    
-    function checkPermission(address _owner) public virtual view returns (bool) {
-        return DiamondContract(app).checkPermission(_this, _owner);
     }
 
     fallback() external payable {
