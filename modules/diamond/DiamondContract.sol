@@ -7,11 +7,9 @@ pragma solidity ^0.8.19;
 * Lightweight version of EIP-2535 Diamonds
 /******************************************************************************/
 
-import {IDiamond} from './interfaces/IDiamond.sol';
-import {IDiamondCut} from './interfaces/IDiamondCut.sol';
-import {DiamondContractManager} from './DiamondContractManager.sol';
-
-import 'hardhat/console.sol';
+import {IDiamond} from "./interfaces/IDiamond.sol";
+import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
+import {DiamondContractManager} from "./DiamondContractManager.sol";
 
 abstract contract DiamondContract {
     using DiamondContractManager for bytes32;
@@ -19,9 +17,13 @@ abstract contract DiamondContract {
 
     bytes32 immutable _this;
 
-    constructor(bytes32 _key, IDiamondCut.FacetCut[] memory _diamondCut, IDiamondCut.DiamondArgs memory _args) payable {
+    constructor(
+        bytes32 _key,
+        IDiamondCut.FacetCut[] memory _diamondCut,
+        IDiamondCut.DiamondArgs memory _args
+    ) payable {
         _this = _key;
-        
+
         _this.setOwner(msg.sender);
         _this.setPermission(address(this), true);
         _this.setPermission(_args.owner, true);
@@ -32,7 +34,10 @@ abstract contract DiamondContract {
         return _this.facet(_funct);
     }
 
-    function facet(bytes32 _service, bytes4 _funct) public view virtual returns (address) {
+    function facet(
+        bytes32 _service,
+        bytes4 _funct
+    ) public view virtual returns (address) {
         return _service.facet(_funct);
     }
 
@@ -40,7 +45,11 @@ abstract contract DiamondContract {
         _this.setInterface(_funct, _state);
     }
 
-    function setInterface(bytes32 _service, bytes4 _funct, bool _state) public virtual {
+    function setInterface(
+        bytes32 _service,
+        bytes4 _funct,
+        bool _state
+    ) public virtual {
         _service.setInterface(_funct, _state);
     }
 
@@ -48,15 +57,24 @@ abstract contract DiamondContract {
         _this.setPermission(_owner, _permission);
     }
 
-    function setPermission(bytes32 _service, address _owner, bool _permission) public virtual {
+    function setPermission(
+        bytes32 _service,
+        address _owner,
+        bool _permission
+    ) public virtual {
         _service.setPermission(_owner, _permission);
     }
 
-    function checkPermission(address _owner) public virtual view returns (bool) {
+    function checkPermission(
+        address _owner
+    ) public view virtual returns (bool) {
         return _this.contract_().checkPermission(_this, _owner);
     }
 
-    function checkPermission(bytes32 _service, address _owner) public virtual view returns (bool) {
+    function checkPermission(
+        bytes32 _service,
+        address _owner
+    ) public view virtual returns (bool) {
         return _service.contract_().checkPermission(_service, _owner);
     }
 

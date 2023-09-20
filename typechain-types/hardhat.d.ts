@@ -77,6 +77,30 @@ declare module "hardhat/types/runtime" {
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IDiamondCut__factory>;
+    getContractFactory(
+      name: "DiamondAuth",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondAuth__factory>;
+    getContractFactory(
+      name: "DiamondBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondBase__factory>;
+    getContractFactory(
+      name: "DiamondLoupe",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondLoupe__factory>;
+    getContractFactory(
+      name: "DiamondFacadeAuth",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondFacadeAuth__factory>;
+    getContractFactory(
+      name: "DiamondFacadeBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondFacadeBase__factory>;
+    getContractFactory(
+      name: "DiamondFacadeLoupe",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.DiamondFacadeLoupe__factory>;
 
     getContractAt(
       name: "Create",
@@ -158,6 +182,36 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.IDiamondCut>;
+    getContractAt(
+      name: "DiamondAuth",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondAuth>;
+    getContractAt(
+      name: "DiamondBase",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondBase>;
+    getContractAt(
+      name: "DiamondLoupe",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondLoupe>;
+    getContractAt(
+      name: "DiamondFacadeAuth",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondFacadeAuth>;
+    getContractAt(
+      name: "DiamondFacadeBase",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondFacadeBase>;
+    getContractAt(
+      name: "DiamondFacadeLoupe",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.DiamondFacadeLoupe>;
 
     deployContract(
       name: "Create",
@@ -223,6 +277,30 @@ declare module "hardhat/types/runtime" {
       name: "IDiamondCut",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDiamondCut>;
+    deployContract(
+      name: "DiamondAuth",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondAuth>;
+    deployContract(
+      name: "DiamondBase",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondBase>;
+    deployContract(
+      name: "DiamondLoupe",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondLoupe>;
+    deployContract(
+      name: "DiamondFacadeAuth",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeAuth>;
+    deployContract(
+      name: "DiamondFacadeBase",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeBase>;
+    deployContract(
+      name: "DiamondFacadeLoupe",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeLoupe>;
 
     deployContract(
       name: "Create",
@@ -304,6 +382,36 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IDiamondCut>;
+    deployContract(
+      name: "DiamondAuth",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondAuth>;
+    deployContract(
+      name: "DiamondBase",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondBase>;
+    deployContract(
+      name: "DiamondLoupe",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondLoupe>;
+    deployContract(
+      name: "DiamondFacadeAuth",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeAuth>;
+    deployContract(
+      name: "DiamondFacadeBase",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeBase>;
+    deployContract(
+      name: "DiamondFacadeLoupe",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.DiamondFacadeLoupe>;
 
     // default types
     getContractFactory(
