@@ -15,7 +15,7 @@ Functions are spread out from the one single contract as facets in the diamond p
      │  ├─ `Service.sol` : Diamond contract
      │  ├─ `IService.sol` : Interface that combine with all of facet's functions for diamond contract
      │  ├─ `Data.sol` : Data storage for diamond contract
-     │  ┣─ shared : Shared functions between facets
+     │  ├─ shared : Shared functions between facets
      │  │  ├─ `Modifers.sol` : Modifier functions for facets
      │  │  ├─ `Events.sol` : Events for facets
      │  │  └─ `Internals.sol` : Shared functions as internal for facets
