@@ -153,7 +153,7 @@ describe("Diamond Test", function () {
           (await (await ethers.getContractAt(
             'contracts/services/market/facets/Get.sol:Get',
             await marketDiamond.getAddress())
-          ).getAllMarkets())[0]);
+          ).getAllMarkets())[1]);
 
         const orderbook2GetFacet = await ethers.getContractAt(
           "contracts/services/orderbook/facets/Get.sol:Get",
