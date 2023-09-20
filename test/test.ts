@@ -39,7 +39,7 @@ describe("Diamond Test", function () {
       console.log(`Functions: ${await getSelectors(facet)}`);
       console.log(`---------------------------------------------------------------`);
 
-      facetCuts.push({ // FaceCut 구조체 형채로 넣음
+      facetCuts.push({
         facetAddress: await facet.getAddress(),
         action: FacetCutAction.Add,
         functionSelectors: await getSelectors(facet)
