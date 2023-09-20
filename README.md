@@ -6,7 +6,7 @@ This project was created to make it easier to use the diamond pattern through ab
 
 ### Structure
 
-Functions are spread out from the one single contract as facets in the diamond pattern. Categorizing contracts with just types such as 'interfaces' or 'libraries' would make a project more complex. So in this case suggest to use like a grouping like a family according to their function's same point of features. This structure follow:
+Functions are spread out from the one single contract as facets in the diamond pattern. Categorizing contracts with just types such as 'interfaces' or 'libraries' would make a project more complex. So in this case suggest to use like a grouping like a family according to their function's same point of features. This hierarchy and its folder structure follow:
 
 ```
 ─ contracts
