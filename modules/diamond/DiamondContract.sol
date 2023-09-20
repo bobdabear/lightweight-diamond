@@ -66,7 +66,7 @@ abstract contract DiamondContract {
         assembly {
             $.slot := slot
         }
-        address f = c.facet[msg.sig].addr;
+        address f = $.facet[msg.sig].addr;
         if (f == address(0)) {
             revert IDiamond.FunctionNotFound(msg.sig);
         }
