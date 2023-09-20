@@ -65,8 +65,9 @@ contract Service is DiamondContract{
 This repository is an example to address the following needs:
 
 -   In order for users to clearly distinguish and interact with a specific orderbook among orderbooks for various token pairs, a different address is required for each orderbook as an access point.
--   Each orderbook must have its own data storage and store real-time prices and orders in different storage, but share functionality.
+-   Each orderbook must have its own data storage and store real-time prices and orders in different storage, but share functionality. 
 
+And also our orderbook also can mint that NFTs, similar to LP tokens, must be issued to separate addresses. And the NFT will use the same address as the orderbook for pair identification
 For this purpose, this is an example of factoryizing a diamond contract called an orderbook.
 
 `Market.sol (Diamond)` : A market contract serves several functions for the market and includes common orderbook facets.
