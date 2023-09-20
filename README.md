@@ -69,8 +69,8 @@ This repository is an example to address the following needs:
 
 For this purpose, this is an example of factoryizing a diamond contract called an orderbook.
 
-`Market.sol (Diamond)` : A market contract serves several functions for the market and includes common orderbook facets.
-`Orderbook.sol (Facade)` : It is a contract that does not itself have a facet for implementing any functionality. The facade only has the address of the parent diamond contract, and the parent holds the facade's facet instead.
+`Market.sol` (Diamond) : A market contract serves several functions for the market and includes common orderbook facets.
+`Orderbook.sol` (Facade) : It is a contract that does not itself have a facet for implementing any functionality. The facade only has the address of the parent diamond contract, and the parent holds the facade's facet instead.
 
 Therefore, facades can be created infinitely, each with its own storage. However, since all of the facades' functions are managed by the parent diamond, multiple diamond functions can be updated and managed at once.
 
