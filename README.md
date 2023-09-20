@@ -135,7 +135,7 @@ contract FacetB{
 
 ```
 
-For public functions, you can use them by declaring them in an interface and referencing them.
+For the public functions, you can use them by declaring them in an interface and referencing them.
 
 ```
 interface IMarket {
