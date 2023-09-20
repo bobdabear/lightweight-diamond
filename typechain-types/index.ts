@@ -30,8 +30,6 @@ export type { DiamondContract } from "./modules/diamond/DiamondContract";
 export { DiamondContract__factory } from "./factories/modules/diamond/DiamondContract__factory";
 export type { DiamondContractManager } from "./modules/diamond/DiamondContractManager";
 export { DiamondContractManager__factory } from "./factories/modules/diamond/DiamondContractManager__factory";
-export type { DiamondContractTest } from "./modules/diamond/DiamondContractTest";
-export { DiamondContractTest__factory } from "./factories/modules/diamond/DiamondContractTest__factory";
 export type { DiamondFacade } from "./modules/diamond/DiamondFacade";
 export { DiamondFacade__factory } from "./factories/modules/diamond/DiamondFacade__factory";
 export type { IDiamond } from "./modules/diamond/interfaces/IDiamond";

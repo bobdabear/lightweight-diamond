@@ -66,10 +66,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DiamondContractManager__factory>;
     getContractFactory(
-      name: "DiamondContractTest",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.DiamondContractTest__factory>;
-    getContractFactory(
       name: "DiamondFacade",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.DiamondFacade__factory>;
@@ -172,11 +168,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.DiamondContractManager>;
     getContractAt(
-      name: "DiamondContractTest",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.DiamondContractTest>;
-    getContractAt(
       name: "DiamondFacade",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -274,10 +265,6 @@ declare module "hardhat/types/runtime" {
       name: "DiamondContractManager",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DiamondContractManager>;
-    deployContract(
-      name: "DiamondContractTest",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.DiamondContractTest>;
     deployContract(
       name: "DiamondFacade",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -380,11 +367,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.DiamondContractManager>;
-    deployContract(
-      name: "DiamondContractTest",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.DiamondContractTest>;
     deployContract(
       name: "DiamondFacade",
       args: any[],
