@@ -159,13 +159,13 @@ interface IMarket {
   function facetBfunction() external;
 }
 
-MarketFacetA{
+contract MarketFacetA{
   funtionc facetAfunction() public {
     IMarket(address(this)).facetBfunction();
   }
 }
 
-MarketFacetB{
+contract MarketFacetB{
   funtionc facetBfunction() public {
     IMarket(address(this)).facetAfunction();
   }
@@ -219,13 +219,13 @@ contract Modifiers {
   Data.Storage internal $;
 }
 
-contract Facet1 is Modifiers{
+contract FacetA is Modifiers{
   function Function1 () public {
     $.myValue + 1;
   }
 }
 
-contract Facet1 is Modifiers{
+contract FacetB is Modifiers{
   function Function2 () public {
     $.myValue * 4;
   }
