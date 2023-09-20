@@ -174,7 +174,7 @@ contract MarketFacetB{
 
 ### Data Storage
 
-Storage that manages facets is automatically created through `DiamondContractManger` by inheriting `DiamondContract`. Separately from this, variables for state management targeting only specific services related to the business logic of the contract must form a separate `Data.sol` contract.
+Storage that manages facets is automatically created through `DiamondContractManger` by inheriting `DiamondContract`. Separately from this, variables for state management targeting only specific services related to the business logic of the contract must form a separate [Data.sol](contracts/services/orderbook/Data.sol) contract.
 
 ```
 library Data {
@@ -198,7 +198,7 @@ If you want to reference data storage in facets, they can be used in the followi
 ```
 import {Data} './Data.sol';
 
-contract MyContract{
+contract Facet{
 
   function myFunction() public returns (uint) {
     Data.Storage storage $ = Data.load();
@@ -209,7 +209,7 @@ contract MyContract{
 }
 ```
 
-Or, for easier use, you can more conveniently access storage from all facets with a single declaration in the Modifiers.sol contract that all facet contracts inherit.
+Or, for easier use, you can more conveniently access storage from all facets with a single declaration in the [Modifiers.sol](contracts/services/orderbook/shared/Modifiers.sol) contract that all facet contracts inherit.
 
 ```
 import {Data} './Data.sol';
