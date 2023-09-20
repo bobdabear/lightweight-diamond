@@ -2,15 +2,14 @@
 pragma solidity ^0.8.19;
 
 import {Modifiers} from "../shared/Modifiers.sol";
+import {Data} from "../Data.sol";
 
 contract Get is Modifiers {
     function getAllMarkets() public view returns (address[] memory) {
         return $.all_markets;
     }
 
-    function getMarketsFor(
-        address _token
-    ) public view returns (address[] memory) {
+    function getMarkets(address _token) public view returns (address[] memory) {
         return $.markets[_token];
     }
 

@@ -22,7 +22,7 @@ import type {
 
 export interface GetInterface extends Interface {
   getFunction(
-    nameOrSignature: "getAllMarkets" | "getMarketsFor" | "getOrderbook"
+    nameOrSignature: "getAllMarkets" | "getMarkets" | "getOrderbook"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -30,7 +30,7 @@ export interface GetInterface extends Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getMarketsFor",
+    functionFragment: "getMarkets",
     values: [AddressLike]
   ): string;
   encodeFunctionData(
@@ -42,10 +42,7 @@ export interface GetInterface extends Interface {
     functionFragment: "getAllMarkets",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "getMarketsFor",
-    data: BytesLike
-  ): Result;
+  decodeFunctionResult(functionFragment: "getMarkets", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getOrderbook",
     data: BytesLike
@@ -97,7 +94,7 @@ export interface Get extends BaseContract {
 
   getAllMarkets: TypedContractMethod<[], [string[]], "view">;
 
-  getMarketsFor: TypedContractMethod<[_token: AddressLike], [string[]], "view">;
+  getMarkets: TypedContractMethod<[_token: AddressLike], [string[]], "view">;
 
   getOrderbook: TypedContractMethod<
     [_base: AddressLike, _quote: AddressLike],
@@ -113,7 +110,7 @@ export interface Get extends BaseContract {
     nameOrSignature: "getAllMarkets"
   ): TypedContractMethod<[], [string[]], "view">;
   getFunction(
-    nameOrSignature: "getMarketsFor"
+    nameOrSignature: "getMarkets"
   ): TypedContractMethod<[_token: AddressLike], [string[]], "view">;
   getFunction(
     nameOrSignature: "getOrderbook"

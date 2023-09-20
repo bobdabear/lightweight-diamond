@@ -6,6 +6,8 @@ import {DiamondContract} from "modules/diamond/DiamondContract.sol";
 
 import {Data} from "./Data.sol";
 
+import "hardhat/console.sol";
+
 contract Market is DiamondContract {
     using Data for Data.Storage;
 
@@ -20,5 +22,6 @@ contract Market is DiamondContract {
         IDiamondCut.DiamondArgs memory _args
     ) DiamondContract(keccak256("market.storage"), _diamondCut, _args) {
         $.permission[msg.sender] = true;
+        console.log($.permission[msg.sender]);
     }
 }

@@ -33,9 +33,9 @@ abstract contract DiamondBase is DiamondGuard {
 
     fallback() external payable virtual guard {
         DiamondContractManager.Data storage $;
-        bytes32 slot = _this;
+        bytes32 __ = _this;
         assembly {
-            $.slot := slot
+            $.slot := __
         }
         bytes4 b = msg.sig;
         address f = $.funct[b].facet;
