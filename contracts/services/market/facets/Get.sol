@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {DiamondContract} from "modules/diamond/DiamondContract.sol";
-import {DiamondContractManager} from "modules/diamond/DiamondContractManager.sol";
-
 import {Modifiers} from "../shared/Modifiers.sol";
 
 contract Get is Modifiers {
