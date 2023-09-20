@@ -123,7 +123,7 @@ library Internals {
   using Data for Data.Storage;
   using Internals for Data.Storage;
 
-  function internalFunction (Storage storage $, uint _value) {
+  function internalFunction (Storage storage $, uint _value) internal {
     $.myValue = _value
   }
 }
@@ -135,7 +135,7 @@ import {Internals} from '../shared/Internals.sol'
 contract FacetA {
     using Internals for Data.Storage;
 
-    function functionFacetA (uint _value) {
+    function functionFacetA (uint _value) public {
       $.internalFunction(_value);
     }
 }
@@ -143,7 +143,7 @@ contract FacetA {
 contract FacetB{
     using Internals for Data.Storage;
 
-    function functionFacetB (uint _value) {
+    function functionFacetB (uint _value) public {
       $.internalFunction(_value);
     }
 }
