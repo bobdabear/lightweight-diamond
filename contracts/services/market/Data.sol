@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-import {IDiamond} from "../../../modules/diamond/interfaces/IDiamond.sol";
-import {IDiamondCut} from "../../../modules/diamond/interfaces/IDiamondCut.sol";
 import {ERROR} from "contracts/types/Error.sol";
 
 library Data {
