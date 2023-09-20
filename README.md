@@ -108,7 +108,7 @@ library Internals {
 }
 ```
 
-Use case of between facets can be checked in [contracts/services/orderbook/facets/Order.sol](contracts/services/orderbook/facets/Order.sol) and [contracts/services/orderbook/facets/Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
+Use case of between facets can be checked in [Order.sol](contracts/services/orderbook/facets/Order.sol) and [Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
 
 ```
 import {Internals} from '../shared/Internals.sol'
