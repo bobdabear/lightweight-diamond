@@ -5,21 +5,14 @@ pragma solidity ^0.8.19;
 * Author: Nick Mudge <nick@perfectabstractions.com>, Twitter/Github: @mudgen
 * Modifier : Coinmeca Team <contact@coinmeca.net>
 * Lightweight version of EIP-2535 Diamonds
-/******************************************************************************/
+\******************************************************************************/
 
-import {IDiamond} from "../interfaces/IDiamond.sol";
-import {IDiamondCut} from "../interfaces/IDiamondCut.sol";
 import {DiamondContractManager} from "../DiamondContractManager.sol";
+import {DiamondBase} from "./DiamondBase.sol";
 
-abstract contract DiamondLoupe {
+abstract contract DiamondLoupe is DiamondBase {
     using DiamondContractManager for bytes32;
     using DiamondContractManager for DiamondContractManager.Data;
-
-    bytes32 private immutable _this;
-
-    constructor(bytes32 _key) {
-        _this = _key;
-    }
 
     function functs(address _facet) public view returns (bytes4[] memory) {
         return _this.functs(_facet);

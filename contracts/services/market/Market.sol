@@ -18,7 +18,5 @@ contract Market is DiamondContract {
     constructor(
         IDiamondCut.FacetCut[] memory _diamondCut,
         IDiamondCut.DiamondArgs memory _args
-    ) DiamondContract(keccak256("market.storage"), _diamondCut, _args) {
-        $.permission[msg.sender] = true;
-    }
+    ) DiamondContract(keccak256("market.storage"), _diamondCut, _args) {}
 }

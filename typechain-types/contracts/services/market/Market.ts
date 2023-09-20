@@ -51,15 +51,34 @@ export declare namespace IDiamondCut {
   ] & { owner: string; init: string; initCalldata: string };
 }
 
+export declare namespace DiamondContractManager {
+  export type FacetStruct = { addr: AddressLike; functs: BytesLike[] };
+
+  export type FacetStructOutput = [addr: string, functs: string[]] & {
+    addr: string;
+    functs: string[];
+  };
+}
+
 export interface MarketInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "checkInterface(bytes32,bytes4)"
+      | "checkInterface(bytes4)"
       | "checkPermission(address)"
       | "checkPermission(bytes32,address)"
       | "facet(bytes4)"
       | "facet(bytes32,bytes4)"
+      | "facets(bytes32)"
+      | "facets()"
+      | "functs(bytes32,address)"
+      | "functs(address)"
+      | "getFacets(bytes32)"
+      | "getFacets()"
       | "setInterface(bytes32,bytes4,bool)"
       | "setInterface(bytes4,bool)"
+      | "setOwner(address)"
+      | "setOwner(bytes32,address)"
       | "setPermission(bytes32,address,bool)"
       | "setPermission(address,bool)"
   ): FunctionFragment;
@@ -68,6 +87,14 @@ export interface MarketInterface extends Interface {
     nameOrSignatureOrTopic: "DiamondCut" | "OwnershipTransferred"
   ): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "checkInterface(bytes32,bytes4)",
+    values: [BytesLike, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkInterface(bytes4)",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "checkPermission(address)",
     values: [AddressLike]
@@ -85,12 +112,41 @@ export interface MarketInterface extends Interface {
     values: [BytesLike, BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "facets(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "functs(bytes32,address)",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "functs(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getFacets(bytes32)",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getFacets()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setInterface(bytes32,bytes4,bool)",
     values: [BytesLike, BytesLike, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "setInterface(bytes4,bool)",
     values: [BytesLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setOwner(address)",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setOwner(bytes32,address)",
+    values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setPermission(bytes32,address,bool)",
@@ -101,6 +157,14 @@ export interface MarketInterface extends Interface {
     values: [AddressLike, boolean]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "checkInterface(bytes32,bytes4)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkInterface(bytes4)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "checkPermission(address)",
     data: BytesLike
@@ -118,11 +182,40 @@ export interface MarketInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "facets(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "facets()", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "functs(bytes32,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "functs(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getFacets(bytes32)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getFacets()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setInterface(bytes32,bytes4,bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "setInterface(bytes4,bool)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setOwner(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setOwner(bytes32,address)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -213,6 +306,18 @@ export interface Market extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  "checkInterface(bytes32,bytes4)": TypedContractMethod<
+    [_service: BytesLike, _interface: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+
+  "checkInterface(bytes4)": TypedContractMethod<
+    [_interface: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+
   "checkPermission(address)": TypedContractMethod<
     [_owner: AddressLike],
     [boolean],
@@ -233,6 +338,38 @@ export interface Market extends BaseContract {
     "view"
   >;
 
+  "facets(bytes32)": TypedContractMethod<
+    [_service: BytesLike],
+    [string[]],
+    "view"
+  >;
+
+  "facets()": TypedContractMethod<[], [string[]], "view">;
+
+  "functs(bytes32,address)": TypedContractMethod<
+    [_service: BytesLike, _facet: AddressLike],
+    [string[]],
+    "view"
+  >;
+
+  "functs(address)": TypedContractMethod<
+    [_facet: AddressLike],
+    [string[]],
+    "view"
+  >;
+
+  "getFacets(bytes32)": TypedContractMethod<
+    [_service: BytesLike],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
+
+  "getFacets()": TypedContractMethod<
+    [],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
+
   "setInterface(bytes32,bytes4,bool)": TypedContractMethod<
     [_service: BytesLike, _funct: BytesLike, _state: boolean],
     [void],
@@ -241,6 +378,18 @@ export interface Market extends BaseContract {
 
   "setInterface(bytes4,bool)": TypedContractMethod<
     [_funct: BytesLike, _state: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  "setOwner(address)": TypedContractMethod<
+    [_owner: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  "setOwner(bytes32,address)": TypedContractMethod<
+    [_service: BytesLike, _owner: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -262,6 +411,16 @@ export interface Market extends BaseContract {
   ): T;
 
   getFunction(
+    nameOrSignature: "checkInterface(bytes32,bytes4)"
+  ): TypedContractMethod<
+    [_service: BytesLike, _interface: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "checkInterface(bytes4)"
+  ): TypedContractMethod<[_interface: BytesLike], [boolean], "nonpayable">;
+  getFunction(
     nameOrSignature: "checkPermission(address)"
   ): TypedContractMethod<[_owner: AddressLike], [boolean], "view">;
   getFunction(
@@ -282,6 +441,36 @@ export interface Market extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "facets(bytes32)"
+  ): TypedContractMethod<[_service: BytesLike], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "facets()"
+  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "functs(bytes32,address)"
+  ): TypedContractMethod<
+    [_service: BytesLike, _facet: AddressLike],
+    [string[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "functs(address)"
+  ): TypedContractMethod<[_facet: AddressLike], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "getFacets(bytes32)"
+  ): TypedContractMethod<
+    [_service: BytesLike],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "getFacets()"
+  ): TypedContractMethod<
+    [],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
+  getFunction(
     nameOrSignature: "setInterface(bytes32,bytes4,bool)"
   ): TypedContractMethod<
     [_service: BytesLike, _funct: BytesLike, _state: boolean],
@@ -292,6 +481,16 @@ export interface Market extends BaseContract {
     nameOrSignature: "setInterface(bytes4,bool)"
   ): TypedContractMethod<
     [_funct: BytesLike, _state: boolean],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "setOwner(address)"
+  ): TypedContractMethod<[_owner: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setOwner(bytes32,address)"
+  ): TypedContractMethod<
+    [_service: BytesLike, _owner: AddressLike],
     [void],
     "nonpayable"
   >;

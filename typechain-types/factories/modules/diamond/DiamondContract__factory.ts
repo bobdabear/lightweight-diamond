@@ -166,6 +166,22 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
+        name: "_user",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "_contractOwner",
+        type: "address",
+      },
+    ],
+    name: "NotContractOwner",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
         name: "_sender",
         type: "address",
       },
@@ -252,6 +268,49 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "bytes32",
+        name: "_service",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes4",
+        name: "_interface",
+        type: "bytes4",
+      },
+    ],
+    name: "checkInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "_interface",
+        type: "bytes4",
+      },
+    ],
+    name: "checkInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_owner",
         type: "address",
@@ -330,6 +389,137 @@ const _abi = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_service",
+        type: "bytes32",
+      },
+    ],
+    name: "facets",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "facets",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_service",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "_facet",
+        type: "address",
+      },
+    ],
+    name: "functs",
+    outputs: [
+      {
+        internalType: "bytes4[]",
+        name: "",
+        type: "bytes4[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_facet",
+        type: "address",
+      },
+    ],
+    name: "functs",
+    outputs: [
+      {
+        internalType: "bytes4[]",
+        name: "",
+        type: "bytes4[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_service",
+        type: "bytes32",
+      },
+    ],
+    name: "getFacets",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "bytes4[]",
+            name: "functs",
+            type: "bytes4[]",
+          },
+        ],
+        internalType: "struct DiamondContractManager.Facet[]",
+        name: "facets_",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getFacets",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "addr",
+            type: "address",
+          },
+          {
+            internalType: "bytes4[]",
+            name: "functs",
+            type: "bytes4[]",
+          },
+        ],
+        internalType: "struct DiamondContractManager.Facet[]",
+        name: "facets_",
+        type: "tuple[]",
       },
     ],
     stateMutability: "view",
@@ -372,6 +562,37 @@ const _abi = [
       },
     ],
     name: "setInterface",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
+    ],
+    name: "setOwner",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "_service",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "_owner",
+        type: "address",
+      },
+    ],
+    name: "setOwner",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

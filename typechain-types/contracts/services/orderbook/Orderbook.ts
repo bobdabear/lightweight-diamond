@@ -20,23 +20,48 @@ import type {
   TypedContractMethod,
 } from "../../../common";
 
+export declare namespace DiamondContractManager {
+  export type FacetStruct = { addr: AddressLike; functs: BytesLike[] };
+
+  export type FacetStructOutput = [addr: string, functs: string[]] & {
+    addr: string;
+    functs: string[];
+  };
+}
+
 export interface OrderbookInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "checkInterface"
       | "checkPermission"
       | "facet"
+      | "facets"
+      | "functs"
+      | "getFacets"
       | "setInterface"
+      | "setOwner"
       | "setPermission"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "checkInterface",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "checkPermission",
     values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "facet", values: [BytesLike]): string;
+  encodeFunctionData(functionFragment: "facets", values?: undefined): string;
+  encodeFunctionData(functionFragment: "functs", values: [AddressLike]): string;
+  encodeFunctionData(functionFragment: "getFacets", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "setInterface",
     values: [BytesLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setOwner",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setPermission",
@@ -44,14 +69,22 @@ export interface OrderbookInterface extends Interface {
   ): string;
 
   decodeFunctionResult(
+    functionFragment: "checkInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "checkPermission",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "facet", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "facets", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "functs", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "getFacets", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setInterface",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setOwner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setPermission",
     data: BytesLike
@@ -101,6 +134,12 @@ export interface Orderbook extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  checkInterface: TypedContractMethod<
+    [_interface: BytesLike],
+    [boolean],
+    "nonpayable"
+  >;
+
   checkPermission: TypedContractMethod<
     [_owner: AddressLike],
     [boolean],
@@ -109,11 +148,23 @@ export interface Orderbook extends BaseContract {
 
   facet: TypedContractMethod<[_funct: BytesLike], [string], "view">;
 
+  facets: TypedContractMethod<[], [string[]], "view">;
+
+  functs: TypedContractMethod<[_facet: AddressLike], [string[]], "view">;
+
+  getFacets: TypedContractMethod<
+    [],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
+
   setInterface: TypedContractMethod<
     [_funct: BytesLike, _state: boolean],
     [void],
     "nonpayable"
   >;
+
+  setOwner: TypedContractMethod<[_owner: AddressLike], [void], "nonpayable">;
 
   setPermission: TypedContractMethod<
     [_owner: AddressLike, _permission: boolean],
@@ -126,11 +177,27 @@ export interface Orderbook extends BaseContract {
   ): T;
 
   getFunction(
+    nameOrSignature: "checkInterface"
+  ): TypedContractMethod<[_interface: BytesLike], [boolean], "nonpayable">;
+  getFunction(
     nameOrSignature: "checkPermission"
   ): TypedContractMethod<[_owner: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "facet"
   ): TypedContractMethod<[_funct: BytesLike], [string], "view">;
+  getFunction(
+    nameOrSignature: "facets"
+  ): TypedContractMethod<[], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "functs"
+  ): TypedContractMethod<[_facet: AddressLike], [string[]], "view">;
+  getFunction(
+    nameOrSignature: "getFacets"
+  ): TypedContractMethod<
+    [],
+    [DiamondContractManager.FacetStructOutput[]],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "setInterface"
   ): TypedContractMethod<
@@ -138,6 +205,9 @@ export interface Orderbook extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setOwner"
+  ): TypedContractMethod<[_owner: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "setPermission"
   ): TypedContractMethod<

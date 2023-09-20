@@ -4,8 +4,8 @@ pragma solidity ^0.8.19;
 /******************************************************************************\
 * Author: Nick Mudge <nick@perfectabstractions.com>, Twitter/Github: @mudgen
 * Modifier : Coinmeca Team <contact@coinmeca.net>
-* Lightweight version of EIP-2535 Diamon$
-/******************************************************************************/
+* Lightweight version of EIP-2535 Diamonds
+\******************************************************************************/
 
 import {IDiamond} from "./interfaces/IDiamond.sol";
 import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
@@ -54,12 +54,11 @@ library DiamondContractManager {
     }
 
     function enforceIsContractOwner(bytes32 _contract) internal view {
-        if (msg.sender != contract_(_contract).owner) {
-            revert IDiamond.NotContractOwner(
-                msg.sender,
-                contract_(_contract).owner
-            );
-        }
+        Data storage $ = contract_(_contract);
+        if ($.owner != address(0))
+            if (msg.sender != $.owner) {
+                revert IDiamond.NotContractOwner(msg.sender, $.owner);
+            }
     }
 
     /* Permission */
@@ -90,8 +89,7 @@ library DiamondContractManager {
         bytes32 _contract,
         address _facet
     ) internal view returns (bytes4[] memory) {
-        Data storage $ = contract_(_contract);
-        return $.facet[_facet].functs;
+        return contract_(_contract).facet[_facet].functs;
     }
 
     function facet(
