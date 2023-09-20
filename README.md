@@ -204,7 +204,6 @@ contract MyContract{
 
   ...
 }
-
 ```
 
 Or, for easier use, you can more conveniently access storage from all facets with a single declaration in the Modifiers.sol contract that all facet contracts inherit.
