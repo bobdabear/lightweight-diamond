@@ -96,7 +96,7 @@ describe("Diamond Test", function () {
             await marketDiamond.getAddress())
           ).getAllMarkets())[1]);
 
-        console.log('Orderbook 1 Price: ', await orderbookDiamondFacade2.getPrice());
+        console.log('Orderbook 2 Price: ', await orderbookDiamondFacade2.getPrice());
       });
 
       it("", async function () {
