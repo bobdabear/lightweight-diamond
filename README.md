@@ -138,8 +138,22 @@ contract FacetB{
 For public functions, you can use them by declaring them in an interface and referencing them.
 
 ```
+interface IMarket {
+  function facetAfunction() external;
+
+  function facetBfunction() external;
+}
+
 MarketFacetA{
-  IMarket(address(this)).facetBfunction();
+  funtionc facetAfunction() public {
+    IMarket(address(this)).facetBfunction();
+  }
+}
+
+MarketFacetB{
+  funtionc facetBfunction() public {
+    IMarket(address(this)).facetAfunction();
+  }
 }
 ```
 
