@@ -41,6 +41,8 @@ In this example repository, facet management and state value management storage 
 This implementation simplifies building the diamond pattern through contract inheritance, as shown below:
 
 ```
+import {DiamondContract} from "modules/diamond/DiamondContract.sol";
+
 contract Service is DiamondContract
 ```
 
