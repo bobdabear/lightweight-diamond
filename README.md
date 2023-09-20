@@ -1,6 +1,6 @@
 # Light-weight Diamond Pattern
 
-# Overview
+## Overview
 
 This project was created to make it easier to use the diamond pattern through abstract implementation and inheritance.
 
