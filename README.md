@@ -115,13 +115,26 @@ library Internals {
 Use case of between facets can be checked in [Order.sol](contracts/services/orderbook/facets/Order.sol) and [Cancel.sol](contracts/services/orderbook/facets/Cancel.sol).
 
 ```
+import {Data} from "../Data.sol";
+
+library Internals {
+  using Data for Data.Storage;
+  using Internals for Data.Storage;
+
+  function internalFunction (Storage storage $, uint _value) {
+    $.myValue = _value
+  }
+}
+```
+
+```
 import {Internals} from '../shared/Internals.sol'
 
 contract FacetA {
     using Internals for Data.Storage;
 
     function functionFacetA (uint _value) {
-      $.internalFunction1(_value);
+      $.internalFunction(_value);
     }
 }
 
@@ -129,7 +142,7 @@ contract FacetB{
     using Internals for Data.Storage;
 
     function functionFacetB (uint _value) {
-      $.internalFunction1(_value);
+      $.internalFunction(_value);
     }
 }
 
