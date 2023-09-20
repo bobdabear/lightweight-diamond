@@ -145,7 +145,6 @@ contract FacetB{
       $.internalFunction(_value);
     }
 }
-
 ```
 
 For the public functions, you can use them by declaring them in an interface and referencing them.
